@@ -8,8 +8,8 @@
 
 1. **Eureka Server** (порт 8761) - сервер регистрации и обнаружения сервисов
 2. **API Gateway** (порт 8080) - шлюз для маршрутизации запросов
-3. **Hotel Service** (порт 8081) - управление отелями и номерами
-4. **Booking Service** (порт 8082) - управление бронированиями и пользователями
+3. **Hotel Service** (порт 8082) - управление отелями и номерами
+4. **Booking Service** (порт 8081) - управление бронированиями и пользователями
 
 ## Функциональность
 
@@ -39,31 +39,34 @@
 
 ## Запуск системы
 
+**Важно:** Сервисы должны запускаться в следующем порядке для корректной работы. Запуск из корневой директории
 ### 1. Запуск Eureka Server
 ```bash
-cd eureka-server
-./gradlew bootRun
+./gradlew :eureka-server:bootRun
 ```
 Eureka Server будет доступен по адресу: http://localhost:8761
 
+**Дождитесь полного запуска Eureka Server перед запуском следующих сервисов.**
+
 ### 2. Запуск Hotel Service
 ```bash
-cd hotel-service
-./gradlew bootRun
+./gradlew :hotel-service:bootRun  
 ```
-Hotel Service будет доступен по адресу: http://localhost:8081
+Hotel Service будет доступен по адресу: http://localhost:8082
+
+**Дождитесь регистрации Hotel Service в Eureka перед запуском следующих сервисов.**
 
 ### 3. Запуск Booking Service
 ```bash
-cd booking-service
-./gradlew bootRun
+./gradlew :booking-service:bootRun
 ```
-Booking Service будет доступен по адресу: http://localhost:8082
+Booking Service будет доступен по адресу: http://localhost:8081
+
+**Дождитесь регистрации Booking Service в Eureka перед запуском API Gateway.**
 
 ### 4. Запуск API Gateway
 ```bash
-cd api-gateway
-./gradlew bootRun
+./gradlew :api-gateway:bootRun
 ```
 API Gateway будет доступен по адресу: http://localhost:8080
 
